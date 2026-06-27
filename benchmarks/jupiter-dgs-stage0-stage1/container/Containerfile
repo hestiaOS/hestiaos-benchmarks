@@ -1,0 +1,18 @@
+# JUPITER Science Demo — optional container path (Podman/Docker, rootless-friendly).
+# The PRIMARY path is stdlib-only local execution; this container is a convenience
+# for reproducible runs. No external Python packages, no network at runtime.
+FROM python:3.11-slim
+
+# Non-root user (rootless-friendly).
+RUN useradd --create-home --uid 10001 demo
+WORKDIR /app
+
+# Copy only the kit (build context = repo root). .dockerignore keeps it lean.
+COPY --chown=demo:demo . /app
+
+USER demo
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+
+# Default: run Stage 0 then Stage 1 (mock). Reports land in /app/reports
+# (mount a volume to collect them). Stdlib only; no network needed.
+CMD ["sh", "-c", "python3 benchmark/run_stage0_environment_probe.py --out reports && python3 benchmark/run_stage1_dgs_benchmark.py --mode mock --out reports && echo 'Done. See reports/.'"]

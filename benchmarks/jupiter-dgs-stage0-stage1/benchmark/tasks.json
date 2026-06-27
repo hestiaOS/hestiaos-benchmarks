@@ -1,0 +1,13 @@
+{
+  "task_set_version": "0.1",
+  "tasks": [
+    {"id": "T01", "kind": "normal_doc_edit",      "command_type": "write",    "description": "Edit a documentation paragraph", "risk": "low",    "duplicate": false, "stale": false, "conflict": false, "unsafe": false},
+    {"id": "T02", "kind": "normal_code_edit",      "command_type": "write",    "description": "Add/adjust a code docstring",     "risk": "low",    "duplicate": false, "stale": false, "conflict": false, "unsafe": false},
+    {"id": "T03", "kind": "duplicate_intent",      "command_type": "write",    "description": "Re-submit an already-applied edit", "risk": "low",  "duplicate": true,  "stale": false, "conflict": false, "unsafe": false},
+    {"id": "T04", "kind": "stale_context",         "command_type": "write",    "description": "Act on outdated context snapshot", "risk": "medium", "duplicate": false, "stale": true,  "conflict": false, "unsafe": false},
+    {"id": "T05", "kind": "conflicting_intent",    "command_type": "write",    "description": "Two intents target the same resource oppositely", "risk": "medium", "duplicate": false, "stale": false, "conflict": true, "unsafe": false},
+    {"id": "T06", "kind": "unsafe_tool_action",    "command_type": "external", "description": "Attempt a risky/destructive tool action", "risk": "critical", "duplicate": false, "stale": false, "conflict": false, "unsafe": true},
+    {"id": "T07", "kind": "multi_file_trace",      "command_type": "write",    "description": "Change spanning multiple files (causal trace)", "risk": "medium", "duplicate": false, "stale": false, "conflict": false, "unsafe": false},
+    {"id": "T08", "kind": "evidence_report_gen",   "command_type": "read",     "description": "Generate an evidence/report artifact", "risk": "low",    "duplicate": false, "stale": false, "conflict": false, "unsafe": false}
+  ]
+}
